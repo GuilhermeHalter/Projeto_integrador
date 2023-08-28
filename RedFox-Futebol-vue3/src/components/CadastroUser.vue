@@ -27,7 +27,7 @@
         <img src="../img/pngfind.com-bite-mark-png-631239.png" alt="Profile" class="rounded-image">
       </div>
       <div class="login-card">
-      <h2 class="login-title">Login</h2>
+      <h2 class="login-title">Cadastro</h2>
       <form @submit.prevent="login" class="login-form">
 
         <div class="input-wrapper">
@@ -42,8 +42,7 @@
         
         <button type="submit" class="login-button">Login</button>
 
-        <router-link to="/cadastrouser" class="cadastrouser">Não tem conta? Cadastre-se no site </router-link>
-
+        
       </form>
       </div>
     </div>
@@ -63,10 +62,6 @@
   border-radius: 50%;
   border: 3px solid #fff;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.cadastrouser{
-  color: #333;
 }
 
 .login-container {
