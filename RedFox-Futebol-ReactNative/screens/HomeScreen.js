@@ -12,12 +12,23 @@ const HomeScreen = () => {
     navigation.navigate('Ingresso'); 
   };
 
+  const handlePerfil = () => {
+    navigation.navigate('Perfil');
+  };
+
   const screenWidth = Dimensions.get('window').width;
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.menu}>
         <Text style={styles.menuItem}>Home</Text>
+
+        <TouchableOpacity
+              style={styles.compraButton}
+              onPress={handlePerfil}>
+            <Text style={styles.compraButtonText}>Perfil</Text>
+        </TouchableOpacity>
+
         <View style={styles.searchBar}>
           <TextInput placeholder="Search" style={styles.searchInput} />
           <Image source={LupaIcon} style={styles.lupaIcon} />
@@ -83,6 +94,18 @@ const HomeScreen = () => {
             <TouchableOpacity
               style={styles.compraButton}
               onPress={handleComprarIngresso} 
+            >
+              <Text style={styles.compraButtonText}>Comprar ingresso</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.column}>
+            <Image source={require('./img/Botafogo.png')} style={styles.image} />
+            <Text style={styles.vsText}>VS</Text>
+            <Image source={require('./img/Flamengo.png')} style={styles.image} />
+            <TouchableOpacity
+              style={styles.compraButton}
+              onPress={handleComprarIngresso}
             >
               <Text style={styles.compraButtonText}>Comprar ingresso</Text>
             </TouchableOpacity>

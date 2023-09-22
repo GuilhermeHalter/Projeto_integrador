@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const ConfirmacaoPagamento = () => {
@@ -16,7 +16,7 @@ const ConfirmacaoPagamento = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Confirmação de Pagamento</Text>
       <View style={styles.inputContainer}>
-        <Text>Nome no Cartão:</Text>
+        <Text style={styles.label}>Nome no Cartão:</Text>
         <TextInput
           style={styles.input}
           value={nome}
@@ -25,7 +25,7 @@ const ConfirmacaoPagamento = () => {
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text>Número do Cartão:</Text>
+        <Text style={styles.label}>Número do Cartão:</Text>
         <TextInput
           style={styles.input}
           value={numeroCartao}
@@ -34,7 +34,7 @@ const ConfirmacaoPagamento = () => {
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text>Data de Expiração:</Text>
+        <Text style={styles.label}>Data de Expiração:</Text>
         <TextInput
           style={styles.input}
           value={dataExpiracao}
@@ -43,7 +43,7 @@ const ConfirmacaoPagamento = () => {
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text>Código de Segurança:</Text>
+        <Text style={styles.label}>Código de Segurança:</Text>
         <TextInput
           style={styles.input}
           value={codigoSeguranca}
@@ -52,10 +52,11 @@ const ConfirmacaoPagamento = () => {
         />
       </View>
       <TouchableOpacity
-              onPress={handleRealizarPagamento} 
-            >
-              <Text>Confirmar pagamento</Text>
-            </TouchableOpacity>
+        style={styles.button}
+        onPress={handleRealizarPagamento}
+      >
+        <Text style={styles.buttonText}>Confirmar Pagamento</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -64,7 +65,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f5f5',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   title: {
     fontSize: 24,
@@ -73,12 +76,31 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginBottom: 16,
+    width: '100%',
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
   },
   input: {
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
     paddingHorizontal: 8,
+    borderRadius: 4,
+  },
+  button: {
+    backgroundColor: '#007BFF',
+    padding: 12,
+    borderRadius: 4,
+    alignItems: 'center',
+    width: '100%',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
