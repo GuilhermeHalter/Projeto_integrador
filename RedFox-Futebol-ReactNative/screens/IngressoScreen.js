@@ -5,6 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 const IngressoScreen = () => {
   const navigation = useNavigation();
 
+  const handleConfirmarCompra = () => {
+    navigation.navigate('Pagamento');
+  };
+
   const [ticketQuantity, setTicketQuantity] = useState({
     padrao: 0,
     vip: 0,
@@ -45,6 +49,7 @@ const IngressoScreen = () => {
     premium: 150,
   };
 
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Compra de Ingresso</Text>
@@ -54,8 +59,7 @@ const IngressoScreen = () => {
           <View style={styles.ticketOptionContainer} key={type}>
             <TouchableOpacity
               style={styles.ticketOption}
-              onPress={() => handleSelectTicket(selectedPrices[type], type)}
-            >
+              onPress={() => handleSelectTicket(selectedPrices[type], type)}>
               <Text style={styles.optionText}>Ingresso {type}</Text>
               <Text style={styles.optionPrice}>R$ {selectedPrices[type]}</Text>
             </TouchableOpacity>
@@ -83,6 +87,12 @@ const IngressoScreen = () => {
           <Text style={styles.addTotalButtonText}>Adicionar ao Total Geral</Text>
         </TouchableOpacity>
         <Text style={styles.totalGeral}>Total Geral: R$ {totalPrice}</Text>
+        <TouchableOpacity
+          style={styles.confirmPurchaseButton}
+          onPress={handleConfirmarCompra}
+        >
+          <Text style={styles.confirmPurchaseButtonText}>Confirmar Compra</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -169,6 +179,18 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   addTotalButtonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  confirmPurchaseButton: {
+    backgroundColor: '#28a745',
+    borderRadius: 10,
+    padding: 10,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  confirmPurchaseButtonText: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#fff',
