@@ -5,10 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 const IngressoScreen = () => {
   const navigation = useNavigation();
 
-  const handleConfirmarCompra = () => {
-    navigation.navigate('Pagamento');
-  };
-
   const [ticketQuantity, setTicketQuantity] = useState({
     padrao: 0,
     vip: 0,
@@ -18,29 +14,35 @@ const IngressoScreen = () => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const handleSelectTicket = (price, type) => {
-    const typeTotal = price * ticketQuantity[type];
-    setTicketQuantity((prevQuantity) => ({
-      ...prevQuantity,
-      [type]: prevQuantity[type] + 1,
-    }));
+    const newQuantity = { ...ticketQuantity };
+    newQuantity[type] += 1;
+    setTicketQuantity(newQuantity);
+
+    const newTotal = Object.keys(newQuantity).reduce(
+      (acc, ticketType) => acc + selectedPrices[ticketType] * newQuantity[ticketType],
+      0
+    );
+    setTotalPrice(newTotal);
   };
 
   const decrementQuantity = (type) => {
     if (ticketQuantity[type] > 0) {
-      const typeTotal = selectedPrices[type] * (ticketQuantity[type] - 1);
-      setTicketQuantity((prevQuantity) => ({
-        ...prevQuantity,
-        [type]: prevQuantity[type] - 1,
-      }));
+      const newQuantity = { ...ticketQuantity };
+      newQuantity[type] -= 1;
+      setTicketQuantity(newQuantity);
+
+      const newTotal = Object.keys(newQuantity).reduce(
+        (acc, ticketType) => acc + selectedPrices[ticketType] * newQuantity[ticketType],
+        0
+      );
+      setTotalPrice(newTotal);
     }
   };
 
-  const addTotalToPrice = () => {
-    let total = 0;
-    Object.keys(selectedPrices).forEach((type) => {
-      total += selectedPrices[type] * ticketQuantity[type];
-    });
-    setTotalPrice(total);
+  const handleConfirmarCompra = () => {
+    if (totalPrice > 0) {
+      navigation.navigate('Pagamento');
+    }
   };
 
   const selectedPrices = {
@@ -49,7 +51,6 @@ const IngressoScreen = () => {
     premium: 150,
   };
 
-  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Compra de Ingresso</Text>
@@ -59,9 +60,15 @@ const IngressoScreen = () => {
           <View style={styles.ticketOptionContainer} key={type}>
             <TouchableOpacity
               style={styles.ticketOption}
-              onPress={() => handleSelectTicket(selectedPrices[type], type)}>
+              onPress={() => handleSelectTicket(selectedPrices[type], type)}
+            >
               <Text style={styles.optionText}>Ingresso {type}</Text>
-              <Text style={styles.optionPrice}>R$ {selectedPrices[type]}</Text>
+              <Text
+                style={styles.optionPrice}
+                onPress={() => handleSelectTicket(selectedPrices[type], type)}
+              >
+                R$ {selectedPrices[type]}
+              </Text>
             </TouchableOpacity>
             <View style={styles.quantityContainer}>
               <TouchableOpacity
@@ -80,16 +87,14 @@ const IngressoScreen = () => {
             </View>
           </View>
         ))}
-        <TouchableOpacity
-          style={styles.addTotalButton}
-          onPress={addTotalToPrice}
-        >
-          <Text style={styles.addTotalButtonText}>Adicionar ao Total Geral</Text>
-        </TouchableOpacity>
         <Text style={styles.totalGeral}>Total Geral: R$ {totalPrice}</Text>
         <TouchableOpacity
-          style={styles.confirmPurchaseButton}
+          style={[
+            styles.confirmPurchaseButton,
+            { backgroundColor: totalPrice > 0 ? '#28a745' : '#ccc' },
+          ]}
           onPress={handleConfirmarCompra}
+          disabled={totalPrice <= 0}
         >
           <Text style={styles.confirmPurchaseButtonText}>Confirmar Compra</Text>
         </TouchableOpacity>
@@ -166,6 +171,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   totalGeral: {
+    paddingBottom: 20,
     fontSize: 24,
     fontWeight: 'bold',
     marginTop: 20,

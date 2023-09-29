@@ -26,7 +26,7 @@ const HomeScreen = () => {
         <TouchableOpacity
               style={styles.compraButton}
               onPress={handlePerfil}>
-            <Text style={styles.compraButtonText}>Perfil</Text>
+            <Image style={styles.roundedImage} source={require('./img/pngfind.com-bite-mark-png-631239.png')} />
         </TouchableOpacity>
 
         <View style={styles.searchBar}>
