@@ -7,9 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 import CadastroScreen from './screens/CadastroScreen';
 import IngressoScreen from './screens/IngressoScreen';
 import PagamentoScreen from './screens/PagamentoScreen';
-import PerfilScreen from './screens/PerfilScreen';
-
-
+import HistoricoScreen from './screens/HistoricoScreen';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -21,7 +19,7 @@ const App = () => {
         <Stack.Screen name="Cadastro" component={CadastroScreen} />
         <Stack.Screen name="Ingresso" component={IngressoScreen} />
         <Stack.Screen name="Pagamento" component={PagamentoScreen} />
-        <Stack.Screen name="Perfil" component={PerfilScreen} />
+        <Stack.Screen name="Historico" component={HistoricoScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

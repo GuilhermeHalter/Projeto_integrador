@@ -10,8 +10,8 @@ const HomeScreen = () => {
     navigation.navigate('Ingresso');
   };
 
-  const handlePerfil = () => {
-    navigation.navigate('Perfil');
+  const handleHistorico = () => {
+    navigation.navigate('Historico');
   };
 
   const screenWidth = Dimensions.get('window').width;
@@ -25,10 +25,10 @@ const HomeScreen = () => {
           <Image source={LupaIcon} style={styles.lupaIcon} />
           <TextInput placeholder="Search" style={styles.searchInput} />
         </View>
-        <View style={styles.handlePerfil}>
+        <View style={styles.handleHistorico}>
           <TouchableOpacity
               style={styles.compraButton}
-              onPress={handlePerfil}>
+              onPress={handleHistorico}>
             <Image style={styles.roundedImage} source={require('./img/pngfind.com-bite-mark-png-631239.png')} />
           </TouchableOpacity>
         </View>
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
-  handlePerfil: {
+  handleHistorico: {
     padding: 10
   }
 });
