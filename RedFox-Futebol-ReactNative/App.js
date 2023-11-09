@@ -1,27 +1,32 @@
-import React from 'react';
+import * as React from 'react';
+import 'react-native-gesture-handler';
+import { PaperProvider } from 'react-native-paper';
+import { RecoilRoot } from 'recoil';
+
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { ImageBackground } from 'react-native-web';
-import LoginScreen from './screens/LoginScreen';
-import HomeScreen from './screens/HomeScreen';
-import CadastroScreen from './screens/CadastroScreen';
-import IngressoScreen from './screens/IngressoScreen';
-import PagamentoScreen from './screens/PagamentoScreen';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-const Stack = createStackNavigator();
+import Times from './views/Time';
 
-const App = () => {
+
+const Drawer = createDrawerNavigator();
+
+function MainDrawer() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Cadastro" component={CadastroScreen} />
-        <Stack.Screen name="Ingresso" component={IngressoScreen} />
-        <Stack.Screen name="Pagamento" component={PagamentoScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <PaperProvider>
+      <NavigationContainer>
+        <Drawer.Navigator>
+          <Drawer.Screen name="Times" component={Times} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
   );
-};
+}
 
-export default App;
+export default function App() {
+  return (
+    <RecoilRoot>
+      <MainDrawer />
+    </RecoilRoot>
+  );
+}
