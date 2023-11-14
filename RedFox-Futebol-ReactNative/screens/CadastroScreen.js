@@ -24,7 +24,7 @@ const CadastroScreen = () => {
             <Image style={styles.roundedImage} source={require('./img/pngfind.com-bite-mark-png-631239.png')} />
           </View>
           <View style={styles.CadastroCard}>
-            <Text style={styles.CadastroTitle}>Cadastro</Text>
+            <Text style={styles.CadastroTitle}>Cadastro brothers</Text>
           <View style={styles.inputWrapper}>
            <TextInput style={styles.inputField} placeholder="Nome de usuário" />
           </View>
